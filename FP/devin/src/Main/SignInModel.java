@@ -9,28 +9,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Aldo Sugiarto
+ *         Devin Christian
+ *         Andriana Pratama Putra
+ *         Dedi Alamsah
  */
-public class SignInModel {
-    
-    private Connection conn = null;
-    private Statement st = null;
+public class SignInModel extends DatabaseConnection{
     
     private String username;
     private String password;
     private String position;
     
-    public void connect(){
-        try {
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/shoestore_database", "root", "");
-            st = (Statement) conn.createStatement();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR! "+ex);
-        }
-    }
     
     public ResultSet login(){
         try {

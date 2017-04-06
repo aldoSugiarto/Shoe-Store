@@ -1,6 +1,7 @@
 package Admin;
 
 import Admin_Stock.Menu_Admin_Stock;
+import Main.DatabaseConnection;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -15,11 +16,11 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Aldo Sugiarto
+ *         Devin Christian
+ *         Andriana Pratama Putra
+ *         Dedi Alamsah
  */
-public class AdminModel {
-    
-    private Connection conn = null;
-    private Statement st = null;
+public class AdminModel extends DatabaseConnection{
     
     int ID;
     String name;
@@ -60,6 +61,7 @@ public class AdminModel {
     
     
     
+    @Override
     public DefaultTableModel refresh(){
         try
         {
@@ -85,6 +87,7 @@ public class AdminModel {
         }
     }
     
+    @Override
     public DefaultTableModel fillTable(ResultSet rs){
         try{
             DefaultTableModel dtm = new DefaultTableModel();
@@ -103,15 +106,6 @@ public class AdminModel {
         catch(Exception ex){
             System.out.println(ex);
             return null;
-        }
-    }
-    
-    public void connect(){
-        try {
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/shoestore_database", "root", "");
-            st = (Statement) conn.createStatement();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR! "+ex);
         }
     }
     

@@ -1,5 +1,6 @@
 package Cashier;
 
+import Main.DatabaseConnection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -17,11 +18,12 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Aldo Sugiarto
+ *         Devin Christian
+ *         Andriana Pratama Putra
+ *         Dedi Alamsah
  */
-public class CashierModel {
+public class CashierModel extends DatabaseConnection{
     
-    private Connection conn = null;
-    private Statement st = null;
     private Menu_Cashier_Transaction MCT;
     java.util.Date myDate = new java.util.Date();
     private java.sql.Date sqlDate = new java.sql.Date(myDate.getTime());
@@ -36,6 +38,7 @@ public class CashierModel {
         return text;
     }
     
+    @Override
     public DefaultTableModel refresh(){
         try
         {
@@ -61,6 +64,7 @@ public class CashierModel {
         }
     }
     
+    @Override
     public DefaultTableModel fillTable(ResultSet rs){
         try{
             DefaultTableModel dtm = new DefaultTableModel();
@@ -79,15 +83,6 @@ public class CashierModel {
         catch(Exception ex){
             System.out.println(ex);
             return null;
-        }
-    }
-    
-    public void connect(){
-        try {
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/shoestore_database", "root", "");
-            st = (Statement) conn.createStatement();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "ERROR! "+ex);
         }
     }
     
@@ -114,4 +109,6 @@ public class CashierModel {
             System.out.println(ex);
         }
     }
+    
+    
 }

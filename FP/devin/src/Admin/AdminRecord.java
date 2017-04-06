@@ -1,8 +1,13 @@
 package Admin;
 
+import javax.swing.JOptionPane;
+
 /**
  *
- * @author AldoSugiarto
+ * @author Aldo Sugiarto
+ *         Devin Christian
+ *         Andriana Pratama Putra
+ *         Dedi Alamsah
  */
 public class AdminRecord extends javax.swing.JFrame {
 
@@ -14,6 +19,7 @@ public class AdminRecord extends javax.swing.JFrame {
     
     public AdminRecord() {
         initComponents();
+        setLocationRelativeTo(null);
         historyTable.setModel(AM.refresh2());
     }
 
@@ -32,10 +38,12 @@ public class AdminRecord extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         historyTable = new javax.swing.JTable();
         btnContinue = new javax.swing.JButton();
+        btnTotal = new javax.swing.JButton();
 
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -65,6 +73,13 @@ public class AdminRecord extends javax.swing.JFrame {
             }
         });
 
+        btnTotal.setText("Total Sales");
+        btnTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTotalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,7 +89,8 @@ public class AdminRecord extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnContinue, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -82,7 +98,7 @@ public class AdminRecord extends javax.swing.JFrame {
                 .addComponent(lblSearch)
                 .addGap(18, 18, 18)
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,7 +110,9 @@ public class AdminRecord extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnContinue, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnContinue, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(btnTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -111,6 +129,19 @@ public class AdminRecord extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnContinueActionPerformed
 
+    private void btnTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Total sales : "+totalSales());
+    }//GEN-LAST:event_btnTotalActionPerformed
+
+    public int totalSales(){
+        int total=0;
+        for(int i=0;i<historyTable.getRowCount();i++){
+            total += (int)historyTable.getValueAt(i, 5);
+        }
+        return total;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -148,6 +179,7 @@ public class AdminRecord extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnContinue;
+    private javax.swing.JButton btnTotal;
     private javax.swing.JTable historyTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
